@@ -47,6 +47,9 @@ void application() {
         if (sliders["Master_volume_slider"]->getValue() != masterVolume) {
             masterVolume = sliders["Master_volume_slider"]->getValue();
             std::cout << "Master volume changed to: " << floatToDecibels(masterVolume) << " db" << std::endl;
+
+            //Change the db value of the track to the master volume
+            engine.getTrack(0)->setVolume(masterVolume);
         }
 
         ui.update();
