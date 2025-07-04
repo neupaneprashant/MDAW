@@ -4,12 +4,16 @@
 #include "Engine.hpp"
 #include <juce_gui_extra/juce_gui_extra.h>
 #include <string>
+#include <stack>
 
 using namespace uilo;
 
 struct UIState {
     std::string file_browser_directory = "";
     int track_count = 0;
+    std::string curr_selected_track = "Master";
+    std::stack<std::string> undo;
+    std::stack<std::string> redo;
     // Add more state variables as needed
 };
 
