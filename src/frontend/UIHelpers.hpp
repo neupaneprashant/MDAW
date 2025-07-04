@@ -60,14 +60,16 @@ Row* topRow() {
 
         // spacer(Modifier().setfixedWidth(16).align(Align::LEFT)),
 
-        // button(
-        //     Modifier().align(Align::LEFT | Align::CENTER_Y).setHeight(.75f).setfixedWidth(96).setColor(sf::Color::Red),
-        //     ButtonStyle::Pill,
-        //     "Save",
-        //     resources.openSansFont,
-        //     sf::Color::White,
-        //     "SAVE"
-        // ),
+        button(
+            Modifier().align(Align::RIGHT | Align::CENTER_Y).setHeight(.75f).setfixedWidth(128).setColor(sf::Color::Red),
+            ButtonStyle::Pill,
+            "save",
+            resources.openSansFont,
+            sf::Color::White,
+            "save"
+        ),
+
+        spacer(Modifier().setfixedWidth(12).align(Align::RIGHT)),
 
         button(
             Modifier().align(Align::RIGHT | Align::CENTER_Y).setHeight(.75f).setfixedWidth(128).setColor(sf::Color::Red),
@@ -143,29 +145,54 @@ Row* track(const std::string& trackName, Align alignment) {
             .setfixedHeight(96)
             .align(alignment),
     contains{
-        row(
+        column(
             Modifier()
                 .align(Align::RIGHT)
                 .setfixedWidth(150)
                 .setColor(sf::Color(155, 155, 155)),
         contains{
-            spacer(Modifier().setfixedWidth(8).align(Align::LEFT)),
+            spacer(Modifier().setfixedHeight(8).align(Align::TOP)),
 
-            text(
-                Modifier().setColor(sf::Color(25, 25, 25)).setfixedHeight(24).align(Align::LEFT | Align::CENTER_Y),
-                trackName,
-                resources.openSansFont
-            ),
+            row(
+                Modifier(),
+            contains{
+                spacer(Modifier().setfixedWidth(8).align(Align::LEFT)),
 
-            slider(
-                Modifier().setfixedWidth(16).setHeight(0.75).align(Align::RIGHT | Align::CENTER_Y),
-                sf::Color::White,
-                sf::Color::Black,
-                trackName + "_volume_slider"
-            ),
+                text(
+                    Modifier().setColor(sf::Color(25, 25, 25)).setfixedHeight(24).align(Align::LEFT | Align::CENTER_Y),
+                    trackName,
+                    resources.openSansFont
+                ),
 
-            spacer(Modifier().setfixedWidth(16).align(Align::RIGHT)),
-        }),
+                slider(
+                    Modifier().setfixedWidth(16).setHeight(1.f).align(Align::RIGHT | Align::CENTER_Y),
+                    sf::Color::White,
+                    sf::Color::Black,
+                    trackName + "_volume_slider"
+                ),
+
+                spacer(Modifier().setfixedWidth(16).align(Align::RIGHT)),
+            }),
+
+            // spacer(Modifier().setfixedWidth(16).align(Align::CENTER_Y)),
+
+            row(
+                Modifier(),
+            contains{
+                spacer(Modifier().setfixedWidth(16).align(Align::LEFT)),
+
+                button(
+                    Modifier().align(Align::LEFT | Align::CENTER_Y).setfixedWidth(64).setfixedHeight(32).setColor(sf::Color(50, 50, 50)),
+                    ButtonStyle::Pill,
+                    "mute",
+                    resources.openSansFont,
+                    sf::Color::White,
+                    "mute_" + trackName
+                ),
+            }),
+
+            spacer(Modifier().setfixedHeight(8).align(Align::BOTTOM)),
+        })
     });
 }
 

@@ -51,6 +51,9 @@ public:
     std::vector<Track*>& getAllTracks();
 
     // Audio Callbacks 
+    // Project State
+    // Save engine state to .mpf file (returns true on success)
+    bool saveState(const std::string& path = "untitled.mpf") const;
     void audioDeviceIOCallbackWithContext(
         const float* const* inputChannelData,
         int numInputChannels,
@@ -62,6 +65,7 @@ public:
 
     void audioDeviceAboutToStart(juce::AudioIODevice* device) override;
     void audioDeviceStopped() override;
+    std::string getCurrentCompositionName() const;
 
 private:
     juce::AudioDeviceManager deviceManager;
@@ -133,10 +137,14 @@ public:
         double sampleRate
     );
 
+    void toggleMute() { muted = !muted; }
+    bool isMuted() const { return muted; }
+
 private:
     std::string name;
     float volumeDb = 0.0f;
     float pan = 0.0f;
+    bool muted = false;
 
     std::vector<AudioClip> clips;
 
